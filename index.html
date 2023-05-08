@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clock</title>
+    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</head>
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+}
+.clock{
+    height: 100vh;
+    width: 100%;
+    background-color: rgb(26, 26, 78);
+    font-family: jokerman;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#clock_list{
+    width: 280px;
+    position: relative;
+    height: 280px;
+    background: blueviolet;
+    border: 18px solid navajowhite;
+    border-radius: 50%;
+    box-shadow: inset 0 5px 25px gold,
+    0 5px 25px black,
+    0 5px 30px gold,
+    0 5px 35px gold,
+    0 5px 35px black,
+    0 5px 35px gold;
+}
+#clock_list::after{
+    content: "";
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    background: greenyellow;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px yellow;
+    align-items: center;
+    top: 0;
+    left:0;
+    right: 0;
+    margin: auto;
+    bottom: 0;
+}
+#clock_list li{
+    list-style: none;
+    position:  absolute;
+}
+.number{
+    padding: 2%;
+    height: 100%;
+    width: 98%;
+    position: absolute;
+    text-align: center;
+}
+.number span{
+    color: #cc2068;
+    font-size: 33px;
+    display: block;
+    text-shadow: 0 5px 18px yellow, 0 2px 5px yellow;
+}
+.number:nth-child(1){
+    transform: rotate(30deg);
+}
+.number:nth-child(1) span{
+    transform: rotate(-30deg);
+}
+.number:nth-child(2){
+    transform: rotate(60deg);
+}
+.number:nth-child(2) span{
+    transform: rotate(-60deg);
+}
+.number:nth-child(3){
+    transform: rotate(90deg);
+}
+.number:nth-child(3) span{
+    transform: rotate(-90deg);
+}
+.number:nth-child(4){
+    transform: rotate(120deg);
+}
+.number:nth-child(4) span{
+    transform: rotate(-120deg);
+}
+.number:nth-child(5){
+    transform: rotate(150deg);
+}
+.number:nth-child(5) span{
+    transform: rotate(-150deg);
+}
+.number:nth-child(6){
+    transform: rotate(180deg);
+}
+.number:nth-child(6) span{
+    transform: rotate(-180deg);
+}
+.number:nth-child(7){
+    transform: rotate(210deg);
+}
+.number:nth-child(7) span{
+    transform: rotate(-210deg);
+}
+.number:nth-child(8){
+    transform: rotate(240deg);
+}
+.number:nth-child(8) span{
+    transform: rotate(-240deg);
+}
+.number:nth-child(9){
+    transform: rotate(270deg);
+}
+.number:nth-child(9) span{
+    transform: rotate(-270deg);
+}
+.number:nth-child(10){
+    transform: rotate(300deg);
+}
+.number:nth-child(10) span{
+    transform: rotate(-300deg);
+}
+.number:nth-child(11){
+    transform: rotate(330deg);
+}
+.number:nth-child(11) span{
+    transform: rotate(-330deg);
+}
+.number:nth-child(12){
+    transform: rotate(360deg);
+}
+.number:nth-child(12) span{
+    transform: rotate(-360deg);
+}
+#second{
+    height: 280px;
+    width: 280px;
+    animation: sec 60s linear infinite;
+}
+#second::after{
+    content: "";
+    width: 3px;
+    height: 90px;
+    border-radius: 2px;
+    background: red;
+    position: absolute;
+    left: -1px;
+    top: -48px;
+    margin: auto;
+    right: 0;
+    bottom: 0;
+    box-shadow: 1px 2px 3px black;
+}
+/* @keyframes sec{
+    to{
+        transform: rotate(360deg);
+    }
+} */
+#minute{
+    height: 280px;
+    width: 280px;
+    animation: sec_min 3600s linear infinite;
+}
+#minute::after{
+    content: "";
+    width: 4px;
+    height: 80px;
+    border-radius: 2px;
+    background-color: darkblue;
+    position: absolute;
+    left: -1px;
+    top: -48px;
+    margin: auto;
+    right: 0;
+    bottom: 0;
+    box-shadow: 1px 2px 3px black;
+}
+/* @keyframes sec_min{
+    to{
+        transform: rotate(360deg);
+    }
+} */
+#hour{
+    height: 280px;
+    width: 280px;
+    animation: sec_hour 86400s linear infinite;
+}
+#hour::after{
+    content: "";
+    width: 4px;
+    height: 85px;
+    border-radius: 2px;
+    background-color: rgb(108, 108, 224);
+    position: absolute;
+    left: -1px;
+    top: -48px;
+    margin: auto;
+    right: 0;
+    bottom: 0;
+    box-shadow: 1px 2px 3px black;
+}
+/* @keyframes sec_hour{
+    to{
+        transform: rotate(360deg);
+    }
+} */
+</style>
+<script>
+    setInterval( () => {
+        dt = new Date();
+        hrtime = dt.getHours();
+        mintime = dt.getMinutes();
+        sectime = dt.getSeconds();
+        hrrotation = 30*hrtime + mintime/2;
+        minrotation = 6*mintime;
+        secrotation = 6*sectime;
+        hour.style.transform = "rotate(" + hrrotation + "deg )";//javascript
+        minute.style.transform = `rotate(${minrotation}deg)`;//jquery
+        second.style.transform = `rotate(${secrotation}deg)`;//jquery
+    }, 1000);
+</script>
+<body>
+    <div class="clock">
+        <ul id="clock_list">
+            <li class="number"><span>1</span></li>
+            <li class="number"><span>2</span></li>
+            <li class="number"><span>3</span></li>
+            <li class="number"><span>4</span></li>
+            <li class="number"><span>5</span></li>
+            <li class="number"><span>6</span></li>
+            <li class="number"><span>7</span></li>
+            <li class="number"><span>8</span></li>
+            <li class="number"><span>9</span></li>
+            <li class="number"><span>10</span></li>
+            <li class="number"><span>11</span></li>
+            <li class="number"><span>12</span></li>
+            <li id="hour"></li>
+            <li id="minute"></li>
+            <li id="second"></li>
+        </ul>
+    </div>
+</body>
+</html>
